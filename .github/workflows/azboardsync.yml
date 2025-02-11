@@ -1,0 +1,30 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Azure Boards Sync 
+
+# Controls when the workflow will run
+on:
+  issues:
+    types:
+      [opened, edited, deleted, closed, reopened, labeled, unlabled, assigned]
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+jobs:
+  alert: 
+     runs-on: ubuntu-latest 
+     steps:
+       - uses: danhellem/github-actions-issue-to-work-item@master
+         env:
+           ado_token: "${{ secrets.ADO_PRESONAL_ACCESS_TOKEN }}"
+           github_token: "${{ secrets.GITHUB_TOKEN }}"
+           ado_organization: "stevebrownlow"
+           ado_project: "MyFirstProject"
+           ado_wit: "Work items"
+           ado_new_state: "New"
+           ado_active_state: "Approved"
+           ado_close_state: "Done"
+           ado_bypassrules: true 
+           
+      
+           
+
+
