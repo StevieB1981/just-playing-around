@@ -16,7 +16,7 @@ jobs:
          env:
            ado_token: "${{ secrets.ADO_PAT }}"
            github_token: "${{ secrets.TEST_PAT }}"
-           ado_organization: "stevebrownlow"
+           ado_organization: "dev.azure.com/stevebrownlow"
            ado_project: "MyFirstProject"
            ado_wit: "Work items"
            ado_new_state: "New"
