@@ -14,8 +14,8 @@ jobs:
      steps:
        - uses: danhellem/github-actions-issue-to-work-item@master
          env:
-           ado_token: "${{ secrets.ADO_PRESONAL_ACCESS_TOKEN }}"
-           github_token: "${{ secrets.GITHUB_TOKEN }}"
+           ado_token: "${{ secrets.ADO_PAT }}"
+           github_token: "${{ secrets.TEST_PAT }}"
            ado_organization: "stevebrownlow"
            ado_project: "MyFirstProject"
            ado_wit: "Work items"
