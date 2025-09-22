@@ -1,0 +1,33 @@
+name: ADO to GitHub Migration Trigger
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  trigger-migration:
+    if: contains(github.event.issue.title, 'ADO_to_GH')
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: Parse Issue Content
+        id: parse
+        run: |
+          echo "Issue Title: ${{ github.event.issue.title }}"
+          echo "Issue Body: ${{ github.event.issue.body }}"
+          echo "${{ github.event.issue.body }}" > issue.txt
+          # Extract ADO repo and pipeline info from issue body
+          ado_repo=$(grep -i 'ADO Repo:' issue.txt | cut -d':' -f2 | xargs)
+          ado_pipeline=$(grep -i 'ADO Pipeline:' issue.txt | cut -d':' -f2 | xargs)
+          gh_repo=$(grep -i 'GitHub Repo:' issue.txt | cut -d':' -f2 | xargs)
+          echo "ado_repo=$ado_repo" >> $GITHUB_OUTPUT
+          echo "ado_pipeline=$ado_pipeline" >> $GITHUB_OUTPUT
+          echo "gh_repo=$gh_repo" >> $GITHUB_OUTPUT
+
+      - name: Trigger Migration Script
+        run: |
+          echo "Migrating ${{ steps.parse.outputs.ado_repo }} to ${{ steps.parse.outputs.gh_repo }}"
+          bash ./scripts/migrate.sh "${{ steps.parse.outputs.ado_repo }}" "${{ steps.parse.outputs.ado_pipeline }}" "${{ steps.parse.outputs.gh_repo }}"
