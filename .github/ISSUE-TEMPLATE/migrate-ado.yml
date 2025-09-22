@@ -1,0 +1,28 @@
+# .github/ISSUE_TEMPLATE/migrate-ado.yml
+name: "ADO to GitHub Migration"
+description: Track migration of a single ADO repo and pipeline
+title: "[MIGRATE] <repo-name>"
+labels: ["migration", "ado", "in-progress"]
+body:
+  - type: input
+    id: ado_repo
+    attributes:
+      label: "ADO Repo URL"
+  - type: input
+    id: github_repo
+    attributes:
+      label: "Target GitHub Repo"
+  - type: textarea
+    id: pipeline_notes
+    attributes:
+      label: "Pipeline Conversion Notes"
+  - type: checkboxes
+    id: migration_steps
+    attributes:
+      label: "Migration Checklist"
+      options:
+        - label: "Clone ADO repo and push to GitHub"
+        - label: "Convert ADO pipeline to GitHub Actions"
+        - label: "Validate pipeline execution"
+        - label: "Archive ADO pipeline"
+        - label: "Close migration issue"
