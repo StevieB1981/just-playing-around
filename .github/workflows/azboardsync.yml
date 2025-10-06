@@ -18,7 +18,7 @@ jobs:
            github_token: "${{ secrets.TEST_PAT }}"
            ado_organization: "stevebrownlow"
            ado_project: "MyFirstProject"
-           ado_wit: "Work items"
+           ado_wprk_items: "Issues"
            ado_new_state: "New"
            ado_active_state: "Approved"
            ado_close_state: "Done"
